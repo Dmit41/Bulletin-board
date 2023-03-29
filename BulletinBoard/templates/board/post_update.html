@@ -1,0 +1,16 @@
+{% extends 'board/default.html' %}
+
+{% block content %}
+<h1>Редактирование</h1>
+<hr>
+{% if post.author == author %}
+    <form enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{ form.media }}
+        <input type="submit" value="Save" />
+    </form>
+{% else %}
+    <h1>Не ваше объявление!</h1>
+{% endif %}
+{% endblock content %}

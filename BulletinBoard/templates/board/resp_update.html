@@ -1,0 +1,15 @@
+{% extends 'board/default.html' %}
+
+{% block content %}
+<h1>Принять отклик?</h1>
+<hr>
+{% if response.post.author == author %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Изменить" />
+    </form>
+{% else %}
+    <h1>Не ваше объявление!</h1>
+{% endif %}
+{% endblock content %}

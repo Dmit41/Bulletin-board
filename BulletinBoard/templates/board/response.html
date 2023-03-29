@@ -1,0 +1,36 @@
+{% extends 'board/default.html' %}'
+
+{% block title %}Отклики{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="features">
+            <h3>Отклики на ваши объявления:</h3>
+            <form action="" method="get">
+                {{ filterset.form.as_p }}
+                <input type="submit" value="Найти" />
+            </form>
+            {% for el in response %}
+                {% if el.post.author == author %}
+
+                    <div class="alert alert-warning">
+                        {{ el.author }} :
+                        {{ el.text}}<br>
+                        <p>Отклик на : {{ el.post.title}}</p><br>
+                        {% if el.status %}
+                            <p style="text-align: right;"><a href="{{ el.id }}/update">Принят</a></p>
+                        {% else %}
+                            <p style="text-align: right;"><a href="{{ el.id }}/update">Не принят</a></p>
+                        {% endif %}
+                        <p style="text-align: right;"><a href="{{ el.id }}/delete">Удалить</a></p>
+                    </div>
+
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <h3>Просматривать отклики могут только авторизованные пользователи.</h3>
+        <h3><a href="{% url 'signup' %}">Регистрация</a> / <a href="/accounts/login">Войти</a></h3>
+    {% endif %}
+
+{% endblock %}

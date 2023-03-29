@@ -1,0 +1,32 @@
+{% extends 'board/default.html' %}'
+
+{% block title %} Объявление {% endblock %}
+
+{% block content %}
+    <div class="features">
+        <div class="alert alert-warning">
+            {{ advert.author }}
+            <p>Для категории: {{ advert.category }}</p>
+            <h3 style="text-align: center;">{{ advert.title }}</h3>
+            <hr>
+            {{ advert.text|safe }}<br>
+            {% if advert.files %}
+                <a class="bot1" href="{{el.files.url}}">Прикреплённый файл</a>
+            {% endif %}
+                <br>
+            {% endif %}
+            <br>
+            <p style="text-align: right;">{{ advert.date }}</p>
+        </div>
+
+        <div class="features">
+            {% for el in test %}
+                <div class="alert alert-warning">
+                    {{ el.author }} :
+                    {{ el.text}}<br>
+                    {{ el.post.title}}<br>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
